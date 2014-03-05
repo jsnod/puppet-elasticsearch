@@ -6,7 +6,7 @@ rvm:
 bundler_args: '--without doclint'
 before_install: rm Gemfile.lock || true
 script:
- -"bundle clean --force"
+ - "bundle clean --force"
  - "bundle exec rake lint"
  - "bundle exec rake syntax"
  - "bundle exec rake template"
