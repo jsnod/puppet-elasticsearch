@@ -16,3 +16,7 @@ group :systemtests do
   gem 'beaker-rspec'
   gem 'pry'
 end
+
+group :doclint do
+  gem 'puppet-doc-lint', :git => 'https://github.com/petems/puppet-doc-lint.git'
+end
