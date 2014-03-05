@@ -4,10 +4,9 @@ rvm:
   - 1.9.3
   - 2.0.0
 bundler_args: '--without doclint'
-before_install:
- - rm Gemfile.lock || true
- - bundle clean --force
+before_install: rm Gemfile.lock || true
 script:
+ -"bundle clean --force"
  - "bundle exec rake lint"
  - "bundle exec rake syntax"
  - "bundle exec rake template"
