@@ -1,11 +1,11 @@
 HOSTS:
-  ubuntu-13-10:
+  debian-7:
      roles:
       - master
       - database
       - dashboard
-   platform: ubuntu-13.10-x64
-   image: ubuntu:13.10
+   platform: debian-7-x64
+   image: debian:7.3
    hypervisor: docker
 CONFIG:
    type: foss

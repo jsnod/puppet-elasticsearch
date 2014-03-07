@@ -1,11 +1,11 @@
 HOSTS:
-  ubuntu-13-10:
+  fedora-20-x64:
      roles:
       - master
       - database
       - dashboard
-   platform: ubuntu-13.10-x64
-   image: ubuntu:13.10
+   platform: fedora-20-x64
+   image: fedora:20
    hypervisor: docker
 CONFIG:
    type: foss
