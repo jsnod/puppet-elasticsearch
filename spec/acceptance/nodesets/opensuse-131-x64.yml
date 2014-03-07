@@ -1,11 +1,11 @@
 HOSTS:
   opensuse-13-1:
-     roles:
+    roles:
       - master
       - database
       - dashboard
-   platform: sles-13.1-x64
-   image: mmckeen/opensuse-13-1
-   hypervisor: docker
+    platform: sles-13.1-x64
+    image: mmckeen/opensuse-13-1
+    hypervisor: docker
 CONFIG:
-   type: foss
+  type: foss

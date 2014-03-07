@@ -1,11 +1,11 @@
 HOSTS:
   fedora-20-x64:
-     roles:
+    roles:
       - master
       - database
       - dashboard
-   platform: fedora-20-x64
-   image: fedora:20
-   hypervisor: docker
+    platform: fedora-20-x64
+    image: fedora:20
+    hypervisor: docker
 CONFIG:
-   type: foss
+  type: foss
