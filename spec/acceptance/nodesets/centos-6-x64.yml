@@ -5,7 +5,10 @@ HOSTS:
       - database
       - dashboard
     platform: centos-6-x64
-    image: centos:6.4
+    image: jordansissel/systems:centos-6.4
     hypervisor: docker
+    docker_cmd: '["/sbin/init"]'
+    extra_commands:
+      - 'yum install -y wget ntpdate rubygems ruby-augeas ruby-devel augeas-devel' 
 CONFIG:
   type: foss

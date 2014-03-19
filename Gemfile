@@ -9,4 +9,4 @@ gem 'beaker', :git => 'https://github.com/electrical/beaker.git', :branch => 'do
 gem 'beaker-rspec'
 gem 'pry'
 gem 'rspec_junit_formatter'
-gem 'puppet-doc-lint', :git => 'https://github.com/petems/puppet-doc-lint.git'
+gem 'docker-api', '=1.9.1'

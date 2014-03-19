@@ -5,7 +5,10 @@ HOSTS:
       - database
       - dashboard
     platform: ubuntu-13.10-x64
-    image: ubuntu:13.10
+    image: jordansissel/systems:ubuntu-13.10
     hypervisor: docker
+    docker_cmd: '["/sbin/init"]'
+    extra_commands:
+      - 'apt-get install -yq ruby1.8-dev libaugeas-dev libaugeas-ruby ruby rubygems lsb-release wget net-tools curl'
 CONFIG:
   type: foss

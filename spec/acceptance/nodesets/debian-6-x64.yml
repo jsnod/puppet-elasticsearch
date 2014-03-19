@@ -1,11 +1,11 @@
 HOSTS:
-  debian-7:
+  debian-6:
     roles:
       - master
       - database
       - dashboard
-    platform: debian-7-x64
-    image: jordansissel/systems:debian-7.3
+    platform: debian-6-x64
+    image: jordansissel/systems:debian-6.0.8
     hypervisor: docker
     docker_cmd: '["/sbin/init"]'
     extra_commands:
