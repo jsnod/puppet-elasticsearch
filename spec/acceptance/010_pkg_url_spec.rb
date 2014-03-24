@@ -7,12 +7,14 @@ describe "Elasticsearch class:" do
   case fact('osfamily')
   when 'RedHat'
     package_name = 'elasticsearch'
+		service_name = 'elasticsearch'
     url          = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.noarch.rpm'
     local        = '/tmp/elasticsearch-1.0.0.noarch.rpm'
     puppet       = 'elasticsearch-1.0.0.noarch.rpm'
 		pid_file     = '/var/run/elasticsearch/elasticsearch.pid'
   when 'Debian'
     package_name = 'elasticsearch'
+		service_name = 'elasticsearch'
     url          = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.deb'
     local        = '/tmp/elasticsearch-1.0.0.deb'
     puppet       = 'elasticsearch-1.0.0.deb'
@@ -64,7 +66,7 @@ describe "Elasticsearch class:" do
 
     describe service(service_name) do
       it { should_not be_enabled }
-      it { should_not be_running } 
+      it { should_not be_running }
     end
 
   end
@@ -156,7 +158,7 @@ describe "Elasticsearch class:" do
 
     describe service(service_name) do
       it { should_not be_enabled }
-      it { should_not be_running } 
+      it { should_not be_running }
     end
 
   end
