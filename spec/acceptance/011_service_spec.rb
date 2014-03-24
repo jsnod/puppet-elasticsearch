@@ -2,6 +2,8 @@ require 'spec_helper_acceptance'
 
 describe "Service tests:" do
 
+  cluster_name = SecureRandom.hex(10)
+
   case fact('osfamily')
     when 'RedHat'
       defaults_file = '/etc/sysconfig/elasticsearch'

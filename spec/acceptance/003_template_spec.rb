@@ -89,6 +89,9 @@ bad_json='{
 }
 '
 
+
+cluster_name = SecureRandom.hex(10)
+
 describe "elasticsearch template define:" do
 
   shell("mkdir -p #{default['distmoduledir']}/another/files")
