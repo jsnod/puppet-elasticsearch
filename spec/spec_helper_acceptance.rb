@@ -27,10 +27,12 @@ RSpec.configure do |c|
     hosts.each do |host|
 
       if !host.is_pe?
-        on host, puppet('module','install','puppetlabs-stdlib', '-v 3.2.0'), { :acceptable_exit_codes => [0,1] }
+				scp_to(host, '/home/jenkins/Puppet/puppetlabs-stdlib-3.2.0.tar.gz', '/tmp/puppetlabs-stdlib-3.2.0.tar.gz')
+				on host, puppet('module','install','/tmp/puppetlabs-stdlib-3.2.0.tar.gz'), { :acceptable_exit_codes => [0,1] }
       end
       if fact('osfamily') == 'Debian'
-        on host, puppet('module','install','puppetlabs-apt'), { :acceptable_exit_codes => [0,1] }
+				scp_to(host, '/home/jenkins/Puppet/puppetlabs-apt-1.4.2.tar.gz', '/tmp/puppetlabs-apt-1.4.2.tar.gz')
+				on host, puppet('module','install','/tmp/puppetlabs-apt-1.4.2.tar.gz'), { :acceptable_exit_codes => [0,1] }
       end
       if fact('osfamily') == 'Suse'
         on host, puppet('module','install','darin-zypprepo'), { :acceptable_exit_codes => [0,1] }
