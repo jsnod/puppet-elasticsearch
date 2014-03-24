@@ -5,8 +5,14 @@ describe "Service tests:" do
   case fact('osfamily')
     when 'RedHat'
       defaults_file = '/etc/sysconfig/elasticsearch'
+			service_name  = 'elasticsearch'
+			package_name  = 'elasticsearch'
+			pid_file      = '/var/run/elasticsearch/elasticsearch.pid'
     when 'Debian'
       defaults_file = '/etc/default/elasticsearch'
+			service_name  = 'elasticsearch'
+			package_name  = 'elasticsearch'
+			pid_file      = '/var/run/elasticsearch.pid'
     when 'Suse'
       defaults_file = '/etc/sysconfig/elasticsearch'
   end
