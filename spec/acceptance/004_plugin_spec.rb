@@ -2,6 +2,18 @@ require 'spec_helper_acceptance'
 
 describe "elasticsearch plugin define:" do
 
+  case fact('osfamily')
+    when 'RedHat'
+			service_name  = 'elasticsearch'
+			package_name  = 'elasticsearch'
+			pid_file      = '/var/run/elasticsearch/elasticsearch.pid'
+    when 'Debian'
+			service_name  = 'elasticsearch'
+			package_name  = 'elasticsearch'
+			pid_file      = '/var/run/elasticsearch.pid'
+  end
+
+
   describe "Install a plugin from official repository" do
 
     it 'should run successfully' do
@@ -11,7 +23,31 @@ describe "elasticsearch plugin define:" do
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
+			sleep 5
       expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
+    end
+
+    if fact('osfamily') != 'Suse'
+      describe service(service_name) do
+        it { should be_enabled }
+        it { should be_running } 
+      end
+
+      describe package(package_name) do
+        it { should be_installed }
+      end
+
+			describe file(pid_file) do
+	      it { should be_file }
+				its(:content) { should match /[0-9]+/ }
+			end
+    end
+
+    describe port(9200) do
+      it {
+        sleep 10
+        should be_listening
+      }
     end
 
     it 'make sure the directory exists' do
