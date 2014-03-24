@@ -19,7 +19,7 @@ describe "elasticsearch class:" do
   describe "default parameters" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }"
+			pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}'}, manage_repo => true, repo_version => '1.0', java_install => true }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)

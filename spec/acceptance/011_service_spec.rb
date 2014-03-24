@@ -22,7 +22,7 @@ describe "Service tests:" do
 
     context "Change the defaults file" do
       it 'should run successfully' do
-        pp = "class { 'elasticsearch': manage_repo => true, repo_version => '1.0', java_install => true, config => { 'node.name' => 'elasticsearch001' }, init_defaults => { 'ES_USER' => 'root' } }"
+				pp = "class { 'elasticsearch': manage_repo => true, repo_version => '1.0', java_install => true, config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}' }, init_defaults => { 'ES_USER' => 'root' } }"
 
         # Run it twice and test for idempotency
         apply_manifest(pp, :catch_failures => true)

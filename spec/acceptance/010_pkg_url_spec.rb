@@ -28,7 +28,7 @@ describe "Elasticsearch class:" do
   context "install via http resource" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': package_url => '#{url}', java_install => true, config => { 'node.name' => 'elasticsearch001' } }"
+			pp = "class { 'elasticsearch': package_url => '#{url}', java_install => true, config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}' } }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
@@ -74,7 +74,7 @@ describe "Elasticsearch class:" do
   context "Install via local file resource" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': package_url => 'file:#{local}', java_install => true, config => { 'node.name' => 'elasticsearch001' } }"
+			pp = "class { 'elasticsearch': package_url => 'file:#{local}', java_install => true, config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}' } }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
@@ -120,7 +120,7 @@ describe "Elasticsearch class:" do
   context "Install via Puppet resource" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': package_url => 'puppet:///modules/another/#{puppet}', java_install => true, config => { 'node.name' => 'elasticsearch001' } }"
+			pp = "class { 'elasticsearch': package_url => 'puppet:///modules/another/#{puppet}', java_install => true, config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}' } }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)

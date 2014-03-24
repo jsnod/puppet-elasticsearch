@@ -17,7 +17,7 @@ describe "elasticsearch plugin define:" do
   describe "Install a plugin from official repository" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }
+			pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001', 'cluster.name' => '#{cluster_name}' }, manage_repo => true, repo_version => '1.0', java_install => true }
             elasticsearch::plugin{'mobz/elasticsearch-head': module_dir => 'head' }
            "
 
@@ -80,7 +80,7 @@ describe "elasticsearch plugin define:" do
     describe "Install a non existing plugin" do
 
       it 'should run successfully' do
-        pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }
+				pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001', 'cluster.name' => '#{cluster_name}' }, manage_repo => true, repo_version => '1.0', java_install => true }
               elasticsearch::plugin{'elasticsearch/non-existing': module_dir => 'non-existing' }
 	     "
         #  Run it twice and test for idempotency

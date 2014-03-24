@@ -1,5 +1,6 @@
 require 'beaker-rspec'
 require 'pry'
+require 'securerandom'
 
 hosts.each do |host|
   # Install Puppet
@@ -37,6 +38,8 @@ RSpec.configure do |c|
       if fact('osfamily') == 'Suse'
         on host, puppet('module','install','darin-zypprepo'), { :acceptable_exit_codes => [0,1] }
       end
+
+      cluster_name = SecureRandom.hex(10)
     end
   end
 end
