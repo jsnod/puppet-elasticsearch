@@ -6,9 +6,11 @@ describe "elasticsearch class:" do
     when 'RedHat'
       package_name = 'elasticsearch'
       service_name = 'elasticsearch'
+			pid_file     = '/var/run/elasticsearch/elasticsearch.pid'
     when 'Debian'
       package_name = 'elasticsearch'
       service_name = 'elasticsearch'
+			pid_file     = '/var/run/elasticsearch.pid'
     when 'Suse'
       package_name = 'elasticsearch'
       service_name = 'elasticsearch'
@@ -33,6 +35,11 @@ describe "elasticsearch class:" do
       describe package(package_name) do
         it { should be_installed }
       end
+
+			describe file(pid_file) do
+	      it { should be_file }
+				its(:content) { should match /[0-9]+/ }
+			end
     end
 
     describe port(9200) do

@@ -7,14 +7,16 @@ describe "Elasticsearch class:" do
   case fact('osfamily')
   when 'RedHat'
     package_name = 'elasticsearch'
-    url = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.noarch.rpm'
-    local = '/tmp/elasticsearch-1.0.0.noarch.rpm'
-    puppet = 'elasticsearch-1.0.0.noarch.rpm'
+    url          = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.noarch.rpm'
+    local        = '/tmp/elasticsearch-1.0.0.noarch.rpm'
+    puppet       = 'elasticsearch-1.0.0.noarch.rpm'
+		pid_file     = '/var/run/elasticsearch/elasticsearch.pid'
   when 'Debian'
     package_name = 'elasticsearch'
-    url = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.deb'
-    local = '/tmp/elasticsearch-1.0.0.deb'
-    puppet = 'elasticsearch-1.0.0.deb'
+    url          = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.0.deb'
+    local        = '/tmp/elasticsearch-1.0.0.deb'
+    puppet       = 'elasticsearch-1.0.0.deb'
+		pid_file     = '/var/run/elasticsearch.pid'
   end
 
   shell("mkdir -p #{default['distmoduledir']}/another/files")
@@ -37,6 +39,11 @@ describe "Elasticsearch class:" do
       it { should be_installed }
     end
 
+    describe file(pid_file) do
+	    it { should be_file }
+		  its(:content) { should match /[0-9]+/ }
+	  end
+
   end
 
   context "Clean" do
@@ -47,6 +54,19 @@ describe "Elasticsearch class:" do
     describe package(package_name) do
       it { should_not be_installed }
     end
+
+    describe port(9200) do
+      it {
+        sleep 10
+        should_not be_listening
+      }
+    end
+
+    describe service(service_name) do
+      it { should_not be_enabled }
+      it { should_not be_running } 
+    end
+
   end
 
   context "Install via local file resource" do
@@ -65,6 +85,11 @@ describe "Elasticsearch class:" do
       it { should be_installed }
     end
 
+    describe file(pid_file) do
+	    it { should be_file }
+		  its(:content) { should match /[0-9]+/ }
+	  end
+
   end
 
   context "Clean" do
@@ -75,6 +100,19 @@ describe "Elasticsearch class:" do
     describe package(package_name) do
       it { should_not be_installed }
     end
+
+		describe port(9200) do
+      it {
+        sleep 10
+        should_not be_listening
+      }
+    end
+
+    describe service(service_name) do
+      it { should_not be_enabled }
+      it { should_not be_running } 
+    end
+
   end
 
   context "Install via Puppet resource" do
@@ -91,6 +129,34 @@ describe "Elasticsearch class:" do
 
     describe package(package_name) do
       it { should be_installed }
+    end
+
+    describe file(pid_file) do
+	    it { should be_file }
+		  its(:content) { should match /[0-9]+/ }
+	  end
+
+  end
+
+  context "Clean" do
+    it 'should run successfully' do
+      apply_manifest("class { 'elasticsearch': ensure => absent }", :catch_failures => true)
+    end
+
+    describe package(package_name) do
+      it { should_not be_installed }
+    end
+
+    describe port(9200) do
+      it {
+        sleep 10
+        should_not be_listening
+      }
+    end
+
+    describe service(service_name) do
+      it { should_not be_enabled }
+      it { should_not be_running } 
     end
 
   end

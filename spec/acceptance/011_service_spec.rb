@@ -25,6 +25,38 @@ describe "Service tests:" do
       end
     end
 
+    if fact('osfamily') != 'Suse'
+      describe service(service_name) do
+        it { should be_enabled }
+        it { should be_running } 
+      end
+
+      describe package(package_name) do
+        it { should be_installed }
+      end
+
+			describe file(pid_file) do
+	      it { should be_file }
+				its(:content) { should match /[0-9]+/ }
+			end
+    end
+
+    describe port(9200) do
+      it {
+        sleep 10
+        should be_listening
+      }
+    end
+
+    describe file('/etc/elasticsearch/elasticsearch.yml') do
+      it { should be_file }
+      it { should contain 'name: elasticsearch001' }
+    end
+
+    describe file('/etc/elasticsearch/templates_import') do
+      it { should be_directory }
+    end
+
     context "Make sure we have ES_USER=root" do
 
       describe file(defaults_file) do
