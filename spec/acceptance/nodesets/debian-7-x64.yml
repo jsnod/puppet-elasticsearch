@@ -4,7 +4,7 @@ HOSTS:
       - master
       - database
       - dashboard
-    platform: debian-7-x64
+    platform: debian-7-amd64
     image: jordansissel/system:debian-7.3
     hypervisor: docker
     docker_cmd: '["/sbin/init"]'

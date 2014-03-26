@@ -4,7 +4,7 @@ HOSTS:
       - master
       - database
       - dashboard
-    platform: ubuntu-13.10-x64
+    platform: ubuntu-13.10-amd64
     image: jordansissel/system:ubuntu-13.10
     hypervisor: docker
     docker_cmd: '["/sbin/init"]'

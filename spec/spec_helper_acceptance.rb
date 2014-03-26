@@ -39,7 +39,6 @@ RSpec.configure do |c|
         on host, puppet('module','install','darin-zypprepo'), { :acceptable_exit_codes => [0,1] }
       end
 
-      cluster_name = SecureRandom.hex(10)
     end
   end
 end
