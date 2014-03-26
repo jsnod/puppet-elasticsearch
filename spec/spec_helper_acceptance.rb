@@ -30,7 +30,11 @@ RSpec.configure do |c|
       if !host.is_pe?
 				scp_to(host, '/home/jenkins/puppet/puppetlabs-stdlib-3.2.0.tar.gz', '/tmp/puppetlabs-stdlib-3.2.0.tar.gz')
 				on host, puppet('module','install','/tmp/puppetlabs-stdlib-3.2.0.tar.gz'), { :acceptable_exit_codes => [0,1] }
-				on host, "touch /etc/sysconfig/network"
+
+				if fact('osfamily') == 'RedHat')
+  				on host, "touch /etc/sysconfig/network"
+				end
+
       end
       if fact('osfamily') == 'Debian'
 				scp_to(host, '/home/jenkins/puppet/puppetlabs-apt-1.4.2.tar.gz', '/tmp/puppetlabs-apt-1.4.2.tar.gz')
