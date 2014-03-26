@@ -31,7 +31,7 @@ RSpec.configure do |c|
 				scp_to(host, '/home/jenkins/puppet/puppetlabs-stdlib-3.2.0.tar.gz', '/tmp/puppetlabs-stdlib-3.2.0.tar.gz')
 				on host, puppet('module','install','/tmp/puppetlabs-stdlib-3.2.0.tar.gz'), { :acceptable_exit_codes => [0,1] }
       else
-				if fact('osfamily') == 'RedHat')
+				if fact('osfamily') == 'RedHat'
   				on host, "touch /etc/sysconfig/network"
 				end
       end
